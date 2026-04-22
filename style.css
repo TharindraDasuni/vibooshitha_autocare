@@ -416,64 +416,110 @@ section { padding: 6rem 4rem; }
   gap: 1.5px;
 }
 
+/* Service Card එකට අදාළ වෙනස්කම් */
+/* සේවා ග්‍රිඩ් එක */
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px; /* කොටු අතර පරතරය */
+}
+
+/* සේවා කාඩ්පත */
 .service-card {
-  background: var(--panel);
-  padding: 2.5rem 2rem;
   position: relative;
+  height: 380px; /* කාඩ්පතේ උස */
   overflow: hidden;
-  cursor: none;
-  transition: background 0.4s;
-  border: 1px solid rgba(255,255,255,0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: flex-end; /* අකුරු පහළට ගැනීමට */
+  cursor: pointer;
 }
-.service-card::before {
-  content: '';
+
+/* පසුබිම් රූපය */
+.svc-img {
   position: absolute;
-  bottom: 0; left: 0;
-  width: 100%; height: 2px;
-  background: var(--red);
-  transform: scaleX(0);
-  transform-origin: left;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* රූපය කොටුව පිරෙන සේ සකසයි */
+  transition: transform 0.8s cubic-bezier(0.2, 1, 0.3, 1);
+  z-index: 1;
+}
+
+/* අකුරු පෙනීමට අඳුරු Overlay එකක් */
+.svc-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.9) 10%, rgba(0,0,0,0.2) 60%, transparent 100%);
+  z-index: 2;
+  transition: background 0.4s ease;
+}
+
+/* අකුරු සහ අන්තර්ගතය */
+.svc-content {
+  position: relative;
+  z-index: 3;
+  padding: 30px;
+  width: 100%;
+  transform: translateY(10px);
   transition: transform 0.4s ease;
-  box-shadow: 0 0 12px var(--red-glow);
 }
-.service-card::after {
-  content: '';
-  position: absolute;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  background: radial-gradient(circle at 0% 100%, rgba(232,0,13,0.06) 0%, transparent 60%);
-  opacity: 0;
-  transition: opacity 0.4s;
-}
-.service-card:hover { background: #141414; }
-.service-card:hover::before { transform: scaleX(1); }
-.service-card:hover::after { opacity: 1; }
-.service-card:hover .svc-icon { color: var(--red-bright); transform: scale(1.1); }
 
 .svc-num {
   font-family: 'Share Tech Mono', monospace;
-  font-size: 0.65rem;
-  color: rgba(232,0,13,0.4);
-  letter-spacing: 0.2em;
-  margin-bottom: 1.5rem;
+  font-size: 0.8rem;
+  color: var(--red-bright);
+  letter-spacing: 0.3em;
+  margin-bottom: 10px;
 }
-.svc-icon {
-  font-size: 2.2rem;
-  margin-bottom: 1.2rem;
-  transition: all 0.3s;
-  display: block;
-}
+
 .svc-title {
-  font-family: 'Orbitron', monospace;
-  font-size: 1rem;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1.3rem;
   font-weight: 700;
-  margin-bottom: 0.8rem;
-  letter-spacing: 0.05em;
+  color: #fff;
+  margin-bottom: 12px;
+  text-transform: uppercase;
 }
+
 .svc-desc {
-  color: var(--grey);
-  font-size: 0.88rem;
-  line-height: 1.7;
+  font-size: 0.9rem;
+  color: #ccc;
+  line-height: 1.6;
+  max-height: 0; /* සාමාන්‍ය වෙලාවට විස්තරය සඟවා තබයි */
+  opacity: 0;
+  transition: all 0.4s ease;
+}
+
+/* --- HOVER EFFECTS --- */
+
+/* මවුසය උඩට ගිය විට රූපය Zoom වීම */
+.service-card:hover .svc-img {
+  transform: scale(1.15);
+}
+
+/* මවුසය උඩට ගිය විට Overlay එක තවත් අඳුරු වීම */
+.service-card:hover .svc-overlay {
+  background: linear-gradient(to top, rgba(232, 0, 13, 0.4) 0%, rgba(0,0,0,0.85) 50%);
+}
+
+/* මවුසය උඩට ගිය විට විස්තරය (Description) දිස්වීම */
+.service-card:hover .svc-desc {
+  max-height: 100px;
+  opacity: 1;
+  margin-top: 10px;
+}
+
+.service-card:hover .svc-content {
+  transform: translateY(0);
+}
+
+/* මොබයිල් ෆෝන් සඳහා */
+@media (max-width: 900px) {
+  .services-grid {
+    grid-template-columns: 1fr; /* තනි තීරුවට */
+  }
 }
 
 /* ABOUT */
