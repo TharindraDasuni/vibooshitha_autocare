@@ -427,7 +427,7 @@ section { padding: 6rem 4rem; }
 /* සේවා කාඩ්පත */
 .service-card {
   position: relative;
-  height: 380px; /* කාඩ්පතේ උස */
+  height: 280px; /* කාඩ්පතේ උස */
   overflow: hidden;
   border: 1px solid rgba(255, 255, 255, 0.1);
   display: flex;
@@ -998,57 +998,47 @@ footer {
   z-index: 2;
   max-width: 50%; /* රෝදයට ඉඩ තැබීමට */
 }
-/* රෝදයට අවශ්‍ය Container එක */
+/* රෝදය රඳවා තබන Container එක */
 .wheel-container {
   position: absolute;
   top: 50%;
-  /* ආරම්භක පිහිටීම තිරයෙන් පිටත */
-  right: -550px; 
-  transform: translateY(-50%) rotate(360deg);
-  /* රෝදයේ ප්‍රමාණය සීමා කිරීම */
+  right: -550px; /* ආරම්භයේදී තිරයෙන් පිටත */
+  transform: translateY(-50%);
   width: 100%;
-  max-width: 500px; 
+  max-width: 500px;
   height: auto;
   opacity: 0;
   z-index: 1;
   pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-/* රෝදය දිස්වන animation එක */
+/* ඇනිමේෂන් එක ක්‍රියාත්මක වන විට (JS මගින් 'show' class එක එකතු වූ පසු) */
 .wheel-container.show {
+  /* පළමුව රෝදය ඇතුළට එයි (1.5s), ඉන්පසු දිගටම කැරකෙයි (infinite) */
   animation: wheelIn 1.5s ease-out forwards;
 }
 
-/* රෝදයේ පෙනුම (image) */
+/* රෝදයේ රූපය (Image) */
 .wheel-container img {
   width: 100%;
   height: auto;
-  display: block;
-}
-
-/* නියෝන් ආලෝකය සඳහා (image එක මත) */
-.wheel-container::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; width: 100%; height: 100%;
   border-radius: 50%;
-  box-shadow: 
-    0 0 10px rgba(255,0,21,0.5), /* මෘදු රතු Glow */
-    0 0 30px var(--red-glow), /* දීප්තිමත් Glow */
-    0 0 60px rgba(255,0,21,0.2);
-  opacity: 0;
-  transition: opacity 0.5s ease-in-out;
+  /* නියෝන් Glow එක රෝදය වටා කෙලින්ම දිස්වීමට */
+  box-shadow: 0 0 30px var(--red-glow), 0 0 60px rgba(232, 0, 13, 0.2);
 }
 
-/* Animation එක අවසන් වූ පසු නියෝන් Glow එක */
-.wheel-container.show::before {
-  opacity: 1;
-  animation: neonGlow 2s ease-in-out infinite alternate;
+/* රෝදය පැමිණි පසු තිබෙන තැන සෙමින් කැරකැවීමට මෙය භාවිතා වේ */
+.wheel-container.show img {
+  /* රෝදය ඇතුළට පැමිණි පසු (1.5s පමාවී) සෙමින් කැරකැවීම අරඹයි */
+  animation: continuousRotation 10s linear infinite 1.5s;
 }
 
+/* --- ANIMATIONS --- */
 
-
-/* රෝදය ඇතුළට එන ඇනිමේෂන් එක */
+/* 1. රෝදය දකුණු පස සිට පෙළ අසලට පෙරළී එන ඇනිමේෂන් එක */
 @keyframes wheelIn {
   0% {
     right: -550px;
@@ -1056,11 +1046,41 @@ footer {
     opacity: 0;
   }
   100% {
-    /* තව තවත් වම් පසට ගැනීමට මෙහි right අගය අඩු කරන්න (උදා: 15% හෝ 20% වැනි) */
-    right: 18%; 
+    /* පෙළට තවත් සමීප කිරීමට මෙහි right අගය වැඩි කරන්න (උදා: 25% හෝ 30%) */
+    right: 25%; 
     transform: translateY(-50%) rotate(0deg);
     opacity: 1;
   }
+}
+
+/* 2. තිබෙන තැන සෙමින් කැරකෙන ඇනිමේෂන් එක */
+@keyframes continuousRotation {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* රෝදයට ගැලපෙන Shadow එක */
+.wheel-container::after {
+  content: '';
+  position: absolute;
+  bottom: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 70%;
+  height: 20px;
+  background: radial-gradient(ellipse at center, rgba(0,0,0,0.7) 0%, transparent 75%);
+  filter: blur(8px);
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 1s ease-out 1s;
+}
+
+.wheel-container.show::after {
+  opacity: 1;
 }
 
 /* රෝදයේ Shadow එක නිවැරදිව තැබීමට */
