@@ -1041,13 +1041,13 @@ footer {
 /* 1. රෝදය දකුණු පස සිට පෙළ අසලට පෙරළී එන ඇනිමේෂන් එක */
 @keyframes wheelIn {
   0% {
-    right: -550px;
+    right: -50vw; /* තිරයෙන් පිටත */
     transform: translateY(-50%) rotate(360deg);
     opacity: 0;
   }
   100% {
-    /* පෙළට තවත් සමීප කිරීමට මෙහි right අගය වැඩි කරන්න (උදා: 25% හෝ 30%) */
-    right: 25%; 
+    /* කලින් තිබුණේ right: 4rem; අගය වැඩි කරන තරමට රෝදය වමට එනවා */
+    right: 15rem; 
     transform: translateY(-50%) rotate(0deg);
     opacity: 1;
   }
@@ -1105,6 +1105,7 @@ footer {
 
 /* Animations */
 
+/* කෝඩ් එකේ පහළම / අගටම තියෙන මේ කොටස හොයාගන්න */
 @keyframes wheelIn {
   0% {
     right: -50vw; /* තිරයෙන් පිටත */
@@ -1112,7 +1113,8 @@ footer {
     opacity: 0;
   }
   100% {
-    right: 4rem; /* අවසන් පිහිටීම (දකුණු පස padding එකට ගැලපෙන සේ) */
+    /* මෙතන කලින් තිබුණ 4rem වෙනුවට 20% හෝ 15rem වගේ අගයක් දෙන්න */
+    right: 20%; 
     transform: translateY(-50%) rotate(0deg);
     opacity: 1;
   }
