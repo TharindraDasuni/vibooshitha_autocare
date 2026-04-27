@@ -1096,6 +1096,19 @@ footer {
   }
 }
 
+/* About Section Image Fix */
+.about-img-inner {
+  width: 100%;
+  height: 100%;
+  display: flex;
+}
+
+.about-img-inner img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
 /* --- FULLY RESPONSIVE MOBILE LAYOUT --- */
 @media (max-width: 900px) {
   nav { padding: 1rem 1.5rem; }
@@ -1137,6 +1150,40 @@ footer {
     border: none; 
     cursor: pointer; /* Mobile වලදී Click කරන්න පුළුවන් වෙන්න */
     z-index: 1001;
+  }
+
+  /* About Section - Mobile Layout */
+  #about { 
+    grid-template-columns: 1fr; 
+    gap: 2.5rem; 
+  }
+  
+  .about-visual { 
+    width: 100%; 
+    max-width: 100%; 
+    margin: 0 auto; 
+    padding-bottom: 1.5rem; /* Floating badge එකට ඉඩ තැබීම */
+  }
+  
+  .about-img-frame { 
+    width: 100%;
+    height: auto; 
+    aspect-ratio: 4/3; /* පින්තූරයේ හැඩය විකෘති නොවීම සඳහා */
+  }
+
+  /* 9+ Years Badge එක ෆෝන් එකට ගැලපෙන සේ සකස් කිරීම */
+  .about-badge-float { 
+    right: 5%; 
+    bottom: 0; 
+    padding: 0.8rem 1.2rem;
+    transform: scale(0.85); /* තරමක් කුඩා කිරීම */
+    transform-origin: bottom right;
+  }
+
+  /* Features List එක තනි තීරුවකට (Single Column) ගැනීම */
+  .about-features { 
+    grid-template-columns: 1fr; 
+    gap: 1rem; 
   }
   
   /* Hero Section */
