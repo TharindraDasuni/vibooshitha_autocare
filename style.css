@@ -1096,31 +1096,129 @@ footer {
   }
 }
 
-/* මොබයිල් ෆෝන් සඳහා layout එක */
+/* --- FULLY RESPONSIVE MOBILE LAYOUT --- */
 @media (max-width: 900px) {
-  #hero {
-    flex-direction: column-reverse; /* රෝදය උඩට */
-    justify-content: center;
-    padding-top: 10rem;
-    padding-bottom: 4rem;
+  nav { padding: 1rem 1.5rem; }
+  
+  /* Mobile Menu Styles */
+  .nav-links { 
+    display: flex; 
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background: rgba(5,5,5,0.98);
+    backdrop-filter: blur(16px);
+    padding: 2rem 0;
+    gap: 1.5rem;
+    text-align: center;
+    border-bottom: 1px solid rgba(232,0,13,0.2);
+    /* ආරම්භයේදී මෙනු එක සඟවා තැබීම */
+    transform: translateY(-150%);
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.4s ease;
   }
   
-  .hero-content {
-    max-width: 100%;
+  /* Menu එක Open වූ විට */
+  .nav-links.active {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .nav-cta { display: none; }
+  .hamburger { 
+    display: block; 
+    font-size: 1.8rem; 
+    color: var(--white); 
+    background: none; 
+    border: none; 
+    cursor: pointer; /* Mobile වලදී Click කරන්න පුළුවන් වෙන්න */
+    z-index: 1001;
+  }
+  
+  /* Hero Section */
+  #hero { 
+    flex-direction: column-reverse; 
+    justify-content: center; 
+    padding-top: 8rem; 
+    padding-bottom: 4rem; 
+  }
+  .hero-content { text-align: center; max-width: 100%; }
+  .hero-title { font-size: 2.5rem; }
+  .hero-badge { margin: 0 auto 1.5rem; }
+  .hero-btns { justify-content: center; flex-wrap: wrap; }
+  
+  /* Hero Wheel - Mobile */
+  .wheel-container, .wheel-container.show { 
+    position: relative !important; 
+    top: auto !important; 
+    right: auto !important; 
+    left: auto !important;
+    transform: none !important; 
+    width: 80%; 
+    max-width: 250px; /* ෆෝන් එකට ගැලපෙන්න තරමක් කුඩා කර ඇත */
+    margin: 0 auto 3rem !important; /* Center කිරීම */
+    opacity: 1 !important; 
+    animation: none !important; /* පෙරළී එන animation එක (wheelIn) සම්පූර්ණයෙන්ම නැවැත්වීම */
+  }
+  
+  /* ෆෝන් එකේදී කෙලින්ම කැරකෙන්න පටන් ගැනීම (ප්‍රමාදයක් / Delay එකක් නැතුව) */
+  .wheel-container img, .wheel-container.show img {
+    animation: continuousRotation 12s linear infinite !important;
+  }
+  
+  /* ටයර් එක යට තියෙන කළු පාට Shadow එක */
+  .wheel-container::after, .wheel-container.show::after { 
+    opacity: 1 !important; 
+    bottom: -15px !important;
+  }
+  .wheel-container::after { opacity: 1; }
+  
+  /* Mobile වලදී Stats තිරස් අතට පෙන්වීම */
+  .hero-stats { 
+    position: relative;
+    right: 0;
+    top: 0;
+    transform: none;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    width: 100%;
+    margin-top: 3rem;
+    animation: none;
+  }
+  .stat-item { 
+    border-right: none; 
+    border-bottom: 2px solid var(--red); 
+    padding-right: 0; 
+    padding-bottom: 0.5rem;
     text-align: center;
   }
   
-  .wheel-container {
-    position: relative;
-    top: auto; right: auto;
-    transform: rotate(0);
-    width: 80%;
-    margin: 0 auto 3rem;
-    opacity: 1;
-    animation: none; /* මොබයිල් වලදී animation නැත */
-  }
+  section { padding: 4rem 1.5rem; }
   
-  .wheel-container::after {
-    opacity: 1;
+  /* Grids සකස් කිරීම */
+  .services-grid { grid-template-columns: 1fr; }
+  #about { grid-template-columns: 1fr; gap: 3rem; }
+  .about-visual { width: 100%; max-width: 500px; margin: 0 auto; }
+  .why-grid { grid-template-columns: 1fr; } /* Mobile වලට තනි තීරුවක් වඩාත් හොඳයි */
+  .pricing-grid { grid-template-columns: 1fr; }
+  .contact-wrap { grid-template-columns: 1fr; gap: 3rem; }
+  
+  /* Contact Form එකේ කොටු දෙක එකකට ගැනීම */
+  .form-row { grid-template-columns: 1fr; }
+  
+  footer { flex-direction: column; gap: 1.5rem; text-align: center; padding: 2rem 1.5rem; }
+  .services-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
+  
+  .about-badge-float { 
+    right: 10px; 
+    bottom: -15px; 
+    padding: 0.8rem 1.2rem; 
   }
+  .about-img-frame { aspect-ratio: auto; height: 300px; }
 }
