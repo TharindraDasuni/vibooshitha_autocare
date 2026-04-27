@@ -88,3 +88,29 @@ window.addEventListener('load', () => {
         }, 500); 
     }
 });
+
+// Mobile Menu Toggle Logic
+const hamburgerBtn = document.querySelector('.hamburger');
+const mobileNavLinks = document.querySelector('.nav-links');
+
+if(hamburgerBtn && mobileNavLinks) {
+  hamburgerBtn.addEventListener('click', () => {
+    mobileNavLinks.classList.toggle('active');
+    
+    // Hamburger icon එක 'X' අකුරට මාරු කිරීම
+    if(mobileNavLinks.classList.contains('active')) {
+      hamburgerBtn.innerHTML = '✕';
+    } else {
+      hamburgerBtn.innerHTML = '☰';
+    }
+  });
+
+  // මෙනු එකේ ලින්ක් එකක් click කළාම මෙනු එක ඉබේම වැසී යාමට
+  const navItems = document.querySelectorAll('.nav-links a');
+  navItems.forEach(item => {
+    item.addEventListener('click', () => {
+      mobileNavLinks.classList.remove('active');
+      hamburgerBtn.innerHTML = '☰';
+    });
+  });
+}
