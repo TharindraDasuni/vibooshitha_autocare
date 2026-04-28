@@ -1265,12 +1265,3 @@ footer {
   }
   .about-img-frame { aspect-ratio: auto; height: 300px; }
 }
-
-/* --- REMOVE BLACK FLOOR SHADOW COMPLETELY --- */
-.wheel-container::after,
-.wheel-container.show::after {
-    display: none !important;
-    background: transparent !important;
-    opacity: 0 !important;
-    visibility: hidden !important;
-}
