@@ -977,12 +977,6 @@ footer {
   }
 }
 
-
-
-
-
-/* style.css ෆයිල් එකට එකතු කරන්න */
-
 /* Hero Section එකේ Layout එක */
 #hero {
   position: relative;
@@ -1013,6 +1007,11 @@ footer {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+/* කළු පාට Shadow එක මුළුමනින්ම ඉවත් කිරීම (Desktop) */
+.wheel-container::after {
+  display: none !important;
 }
 
 /* ඇනිමේෂන් එක ක්‍රියාත්මක වන විට (JS මගින් 'show' class එක එකතු වූ පසු) */
@@ -1062,7 +1061,6 @@ footer {
     transform: rotate(360deg);
   }
 }
-
 
 /* Animations */
 
@@ -1217,12 +1215,10 @@ footer {
     animation: continuousRotation 12s linear infinite !important;
   }
   
-  /* ටයර් එක යට තියෙන කළු පාට Shadow එක */
+  /* ටයර් එක යට තියෙන කළු පාට Shadow එක අයින් කර ඇත */
   .wheel-container::after, .wheel-container.show::after { 
-    opacity: 1 !important; 
-    bottom: -15px !important;
+    display: none !important;
   }
-  .wheel-container::after { opacity: 1; }
   
   /* Mobile වලදී Stats තිරස් අතට පෙන්වීම */
   .hero-stats { 
@@ -1268,4 +1264,13 @@ footer {
     padding: 0.8rem 1.2rem; 
   }
   .about-img-frame { aspect-ratio: auto; height: 300px; }
+}
+
+/* --- REMOVE BLACK FLOOR SHADOW COMPLETELY --- */
+.wheel-container::after,
+.wheel-container.show::after {
+    display: none !important;
+    background: transparent !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
 }
